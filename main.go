@@ -26,8 +26,11 @@ func main() {
 	r.POST("/orders", orderController.PostOrder)
 	r.GET("/orders/:id", orderController.GetOneOrder)
 	r.DELETE("/orders/:id", orderController.Delete)
+	r.PUT("/orders/:id", orderController.UpdateOrder)
 	r.GET("/items", itemController.GetItems)
 	r.POST("/items", itemController.PostItem)
 	r.DELETE("/items/:id", itemController.Delete)
+	r.PUT("/items/:id", itemController.UpdateItem)
+
 	r.Run()
 }
