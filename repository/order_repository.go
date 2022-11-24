@@ -28,7 +28,8 @@ func (r *orderRepository) Create(item domain.Order) (domain.Order, error) {
 }
 
 func (r *orderRepository) Delete(ID int) error {
-	err := r.db.Delete(&domain.Order{}, ID).Error
+	err := r.db.Where("order_id = ?", ID).Delete(&domain.Items{}).Error
+	err = r.db.Delete(&domain.Order{}, ID).Error
 	return err
 }
 
