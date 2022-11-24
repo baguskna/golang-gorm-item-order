@@ -60,12 +60,6 @@ func (ic *itemController) UpdateItem(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&itemReq)
 	if err != nil {
-		// errMessages := []string{}
-		// for _, e := range err.(validator.ValidationErrors) {
-		// 	errMessage := fmt.Sprintf("Error on field %s, condition: %s", e.Field(), e.ActualTag())
-		// 	errMessages = append(errMessages, errMessage)
-		// }
-
 		c.JSON(http.StatusBadRequest, gin.H{
 			"errors": err,
 		})

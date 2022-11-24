@@ -55,17 +55,11 @@ func (ic *orderController) PostOrder(c *gin.Context) {
 	})
 }
 
-func (ic *orderController) Updateorder(c *gin.Context) {
+func (ic *orderController) UpdateOrder(c *gin.Context) {
 	var orderReq domain.Order
 
 	err := c.ShouldBindJSON(&orderReq)
 	if err != nil {
-		// errMessages := []string{}
-		// for _, e := range err.(validator.ValidationErrors) {
-		// 	errMessage := fmt.Sprintf("Error on field %s, condition: %s", e.Field(), e.ActualTag())
-		// 	errMessages = append(errMessages, errMessage)
-		// }
-
 		c.JSON(http.StatusBadRequest, gin.H{
 			"errors": err,
 		})
