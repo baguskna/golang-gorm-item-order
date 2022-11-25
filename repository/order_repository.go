@@ -7,11 +7,11 @@ import (
 )
 
 type OrderRepository interface {
-	Create(item domain.Order) (domain.Order, error)
+	Create(order domain.Order) (domain.Order, error)
 	Delete(ID int) error
 	FindAll() ([]domain.Order, error)
 	FindById(ID int) (domain.Order, error)
-	Update(item domain.Order) (domain.Order, error)
+	Update(order domain.Order) (domain.Order, error)
 }
 
 type orderRepository struct {
@@ -22,9 +22,9 @@ func NewOrderRepository(db *gorm.DB) *orderRepository {
 	return &orderRepository{db}
 }
 
-func (r *orderRepository) Create(item domain.Order) (domain.Order, error) {
-	err := r.db.Create(&item).Error
-	return item, err
+func (r *orderRepository) Create(order domain.Order) (domain.Order, error) {
+	err := r.db.Create(&order).Error
+	return order, err
 }
 
 func (r *orderRepository) Delete(ID int) error {
@@ -34,18 +34,18 @@ func (r *orderRepository) Delete(ID int) error {
 }
 
 func (r *orderRepository) FindAll() ([]domain.Order, error) {
-	var items []domain.Order
-	err := r.db.Preload("Items").Find(&items).Error
-	return items, err
+	var orders []domain.Order
+	err := r.db.Preload("Items").Find(&orders).Error
+	return orders, err
 }
 
 func (r *orderRepository) FindById(ID int) (domain.Order, error) {
-	var item domain.Order
-	err := r.db.Preload("Items").Find(&item, ID).Error
-	return item, err
+	var order domain.Order
+	err := r.db.Preload("Items").Find(&order, ID).Error
+	return order, err
 }
 
-func (r *orderRepository) Update(item domain.Order) (domain.Order, error) {
-	err := r.db.Save(&item).Error
-	return item, err
+func (r *orderRepository) Update(order domain.Order) (domain.Order, error) {
+	err := r.db.Save(&order).Error
+	return order, err
 }
